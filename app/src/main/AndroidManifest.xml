@@ -13,14 +13,30 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.WeatherAppAssessment">
+        <activity
+            android:name=".ui.SavedLocationsListActivity"
+            android:label="@string/title_activity_saved_locations_list"
+            android:theme="@style/Theme.WeatherAppAssessment.NoActionBar"></activity>
+        <activity
+            android:name=".ui.WeatherDetailsActivity"
+            android:label="@string/title_activity_weather_details"
+            android:theme="@style/Theme.WeatherAppAssessment.NoActionBar" />
+        <activity
+            android:name=".ui.WeatherResultsListActivity"
+            android:label="@string/title_activity_weather_results_list"
+            android:theme="@style/Theme.WeatherAppAssessment.NoActionBar" />
+        <activity
+            android:name=".ui.WeatherResultListActivity"
+            android:label="@string/title_activity_weather_result_list"
+            android:theme="@style/Theme.WeatherAppAssessment.NoActionBar" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBclMBVKsj9cLFAQFiE-VI3OFUYxUdVEUY" />
 
-        <activity android:name=".MainActivity" />
+        <activity android:name=".ui.MainActivity" />
         <activity
-            android:name=".SplashActivity"
+            android:name=".ui.SplashActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,7 +44,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
     </application>
 
 </manifest>

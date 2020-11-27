@@ -1,4 +1,16 @@
 <resources>
     <string name="app_name">Weather App Assessment</string>
     <string name="weather_assessment_app">WEATHER</string>
+    <string name="title_activity_weather_result_list">WeatherResultListActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="title_activity_weather_results_list">WeatherResultsListActivity</string>
+    <string name="title_activity_weather_details">WeatherDetailsActivity</string>
+    <string name="title_activity_saved_locations_list">SavedLocationsListActivity</string>
 </resources>
