@@ -54,9 +54,14 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         mapFragment.getMapAsync(OnMapReadyCallback {
             googleMap = it
 
+            var latitude : Double? = null
+            var longitude : Double? = null
+
             googleMap.setOnMapClickListener { it ->
                 googleMap.clear()
-                locationName = getLocationNameByLatLong(it.latitude, it.longitude)
+                latitude = it.latitude
+                longitude = it.longitude
+                locationName = getLocationNameByLatLong(latitude!!, longitude!!)
                 val mapMarker = googleMap.addMarker(
                     MarkerOptions()
                         .position(it)
@@ -66,13 +71,23 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 mapMarker.showInfoWindow()
                 googleMap.animateCamera(CameraUpdateFactory.newLatLng(it))
 
-                googleMap.setOnInfoWindowClickListener { this }
+                googleMap.setOnInfoWindowClickListener(GoogleMap.OnInfoWindowClickListener {
+                    openWeatherResultsActivity(latitude!!, longitude!!)
+                })
 
-                // TODO Show name and list of days  for weather for that location
                 saveLocationToRoomDatabase(locationName, it.latitude, it.longitude)
             }
         })
 
+    }
+
+    private fun openWeatherResultsActivity(latitude: Double, longitude: Double) {
+        val openSavedWeatherResultsIntent =
+            Intent(this, WeatherResultsListActivity::class.java).apply {
+                putExtra("locationLatitude", latitude)
+                putExtra("locationLongitude", longitude)
+            }
+        startActivity(openSavedWeatherResultsIntent)
     }
 
     private fun getLocationNameByLatLong(latitude: Double, longitude: Double): String {
@@ -81,38 +96,24 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         return address[0].getAddressLine(0)
     }
 
-    internal inner class InfoWindowActivity : AppCompatActivity(),
-        GoogleMap.OnInfoWindowClickListener,
-        OnMapReadyCallback {
-        override fun onMapReady(googleMap: GoogleMap) {
-            googleMap.setOnInfoWindowClickListener(this)
-        }
-
-        override fun onInfoWindowClick(marker: Marker) {
-            Toast.makeText(
-                this, "Info window clicked",
-                Toast.LENGTH_SHORT
-            ).show()
-        }
-    }
-
     private fun saveLocationToRoomDatabase(name: String, latitude: Double, longitude: Double): Unit {
         presenter = DatabasePresenter()
         presenter.startDatabase(this)
         presenter.saveLocationToDatabase(SavedLocation(0, name, latitude, longitude))
+        Toast.makeText(this, "Location saved to history", Toast.LENGTH_SHORT).show()
     }
 
     override fun onClick(v: View?) {
         when (v!!.id) {
             R.id.saved_locations_icon_imageview -> {
-                val openSavedLocationActivity =
+                val openSavedLocationsActivityIntent =
                     Intent(this, SavedLocationsListActivity::class.java).apply {}
-                startActivity(openSavedLocationActivity)
+                startActivity(openSavedLocationsActivityIntent)
             }
 
             R.id.setting_icon_imageview -> {
-                val openSettingsActivity = Intent(this, SettingsActivity::class.java).apply {}
-                startActivity(openSettingsActivity)
+                val openSettingsActivityIntent = Intent(this, SettingsActivity::class.java).apply {}
+                startActivity(openSettingsActivityIntent)
             }
         }
     }

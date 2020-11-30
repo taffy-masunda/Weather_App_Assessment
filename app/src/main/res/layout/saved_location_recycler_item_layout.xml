@@ -23,13 +23,14 @@
 
         <TextView
             android:id="@+id/location_name_textview"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/sixteen"
             android:lines="2"
             android:paddingBottom="@dimen/four"
             android:text="@string/placeholder_text"
             app:layout_constraintLeft_toRightOf="@id/map_marker_icon"
+            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -38,6 +39,7 @@
             android:layout_height="wrap_content"
             android:text="@string/latitude"
             android:paddingEnd="@dimen/sixteen"
+            android:textSize="@dimen/font_twelve"
             app:layout_constraintLeft_toLeftOf="@id/location_name_textview"
             app:layout_constraintTop_toBottomOf="@id/location_name_textview"
             tools:ignore="RtlSymmetry" />
@@ -46,7 +48,7 @@
             android:id="@+id/location_longitude_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:lines="1"
+            android:textSize="@dimen/font_twelve"
             android:text="@string/longitude"
             app:layout_constraintLeft_toRightOf="@id/location_latitude_textview"
             app:layout_constraintTop_toBottomOf="@id/location_name_textview" />
