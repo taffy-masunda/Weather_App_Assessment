@@ -11,12 +11,10 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import za.co.taffy.weatherappassessment.R
 import za.co.taffy.weatherappassessment.database.SavedLocation
 import za.co.taffy.weatherappassessment.presentation.DatabasePresenter
-import kotlin.math.log
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -50,12 +48,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     fun setupMapView() {
 
-        var locationName : String
+        var locationName: String
         mapFragment.getMapAsync(OnMapReadyCallback {
             googleMap = it
 
-            var latitude : Double? = null
-            var longitude : Double? = null
+            var latitude: Double? = null
+            var longitude: Double? = null
 
             googleMap.setOnMapClickListener { it ->
                 googleMap.clear()
@@ -82,11 +80,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun openWeatherResultsActivity(latitude: Double, longitude: Double) {
-        val openSavedWeatherResultsIntent =
-            Intent(this, WeatherResultsListActivity::class.java).apply {
-                putExtra("locationLatitude", latitude)
-                putExtra("locationLongitude", longitude)
-            }
+        val openSavedWeatherResultsIntent = Intent(this, WeatherResultsListActivity::class.java)
+        openSavedWeatherResultsIntent.putExtra("locationLatitude", latitude)
+        openSavedWeatherResultsIntent.putExtra("locationLongitude", longitude)
+
         startActivity(openSavedWeatherResultsIntent)
     }
 
@@ -96,7 +93,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         return address[0].getAddressLine(0)
     }
 
-    private fun saveLocationToRoomDatabase(name: String, latitude: Double, longitude: Double): Unit {
+    private fun saveLocationToRoomDatabase(
+        name: String,
+        latitude: Double,
+        longitude: Double
+    ): Unit {
         presenter = DatabasePresenter()
         presenter.startDatabase(this)
         presenter.saveLocationToDatabase(SavedLocation(0, name, latitude, longitude))
