@@ -54,8 +54,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         mapFragment.getMapAsync(OnMapReadyCallback {
             googleMap = it
 
-
-
             googleMap.setOnMapClickListener { it ->
                 googleMap.clear()
                 locationName = getLocationNameByLatLong(it.latitude, it.longitude)
@@ -70,8 +68,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
                 googleMap.setOnInfoWindowClickListener { this }
 
-                // TODO Show name adn list of days  for weather for that location
-                // TODO save the selected location name and it's lat-long
+                // TODO Show name and list of days  for weather for that location
                 saveLocationToRoomDatabase(locationName, it.latitude, it.longitude)
             }
         })
@@ -99,7 +96,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    fun saveLocationToRoomDatabase(name: String, latitude: Double, longitude: Double): Unit {
+    private fun saveLocationToRoomDatabase(name: String, latitude: Double, longitude: Double): Unit {
         presenter = DatabasePresenter()
         presenter.startDatabase(this)
         presenter.saveLocationToDatabase(SavedLocation(0, name, latitude, longitude))

@@ -8,25 +8,28 @@ import za.co.taffy.weatherappassessment.database.AppDatabase
 import za.co.taffy.weatherappassessment.database.SavedLocation
 import za.co.taffy.weatherappassessment.database.SavedLocationDao
 
-class DatabasePresenter {
+class SavedLocationsPresenter {
+
     lateinit var context: Context
     var database: AppDatabase? = null
-    private var savedLocationDao: SavedLocationDao? = null
+    var savedLocationDao: SavedLocationDao? = null
+    lateinit var savedList: Observable<List<SavedLocation>>
 
     fun startDatabase(context: Context) {
         this.context = context
         database = AppDatabase.getAppDataBase(this.context)
     }
 
-    fun saveLocationToDatabase(location: SavedLocation): Unit {
+    fun getSavedLocations() {
         Observable.fromCallable {
             savedLocationDao = database?.savedLocationDao()
 
             with(savedLocationDao) {
-                this?.insertLocation(location)
+                return@fromCallable this?.getSavedLocations()
             }
+
         }.doOnNext { list ->
-            System.out.print("TEST DISPLAY: /n" + list.toString())
+            savedLocationDao?.getSavedLocations()
         }.subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe()

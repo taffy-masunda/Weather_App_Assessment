@@ -37,7 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/latitude"
-            android:paddingEnd="@dimen/thirty_two"
+            android:paddingEnd="@dimen/sixteen"
             app:layout_constraintLeft_toLeftOf="@id/location_name_textview"
             app:layout_constraintTop_toBottomOf="@id/location_name_textview"
             tools:ignore="RtlSymmetry" />

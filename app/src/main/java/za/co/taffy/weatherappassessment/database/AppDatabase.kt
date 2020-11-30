@@ -15,7 +15,11 @@ abstract class AppDatabase : RoomDatabase() {
         fun getAppDataBase(context: Context): AppDatabase? {
             if (DATABASE_INSTANCE == null){
                 synchronized(AppDatabase::class){
-                    DATABASE_INSTANCE = Room.databaseBuilder(context.applicationContext, AppDatabase::class.java, "locationsDB").build()
+                    DATABASE_INSTANCE = Room.databaseBuilder(context.applicationContext,
+                        AppDatabase::class.java, "locationsDB")
+                        .allowMainThreadQueries()
+                        .fallbackToDestructiveMigration()
+                        .build()
                 }
             }
             return DATABASE_INSTANCE
