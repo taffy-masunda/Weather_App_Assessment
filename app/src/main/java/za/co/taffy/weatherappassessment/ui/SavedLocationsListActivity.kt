@@ -32,7 +32,7 @@ class SavedLocationsListActivity : AppCompatActivity() {
         savedLocationsRecycler = findViewById(R.id.saved_locations_recyclerview)
     }
 
-    private fun setupRecyclerView(): Unit {
+    private fun setupRecyclerView() {
 
         presenter = SavedLocationsPresenter()
         presenter.startDatabase(this)
@@ -42,8 +42,10 @@ class SavedLocationsListActivity : AppCompatActivity() {
                 layoutManager = LinearLayoutManager(context)
                 val savedList = AppDatabase.DATABASE_INSTANCE!!.savedLocationDao().getSavedLocations()
                         .sortedByDescending { it.id }
-                savedLocationsRecycler.visibility = View.VISIBLE
-                noSavedLocationsTextview.visibility = View.INVISIBLE
+                if(savedList.isNotEmpty()){
+                    savedLocationsRecycler.visibility = View.VISIBLE
+                    noSavedLocationsTextview.visibility = View.INVISIBLE
+                }
                 adapter = SavedLocationsAdapter(savedList)
             }
         }
