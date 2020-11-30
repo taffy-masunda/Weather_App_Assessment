@@ -42,6 +42,7 @@ class SavedLocationsListActivity : AppCompatActivity() {
                 layoutManager = LinearLayoutManager(context)
                 val savedList = AppDatabase.DATABASE_INSTANCE!!.savedLocationDao().getSavedLocations()
                         .sortedByDescending { it.id }
+                savedLocationsRecycler.visibility = View.VISIBLE
                 noSavedLocationsTextview.visibility = View.INVISIBLE
                 adapter = SavedLocationsAdapter(savedList)
             }
