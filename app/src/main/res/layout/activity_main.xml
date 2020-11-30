@@ -8,14 +8,40 @@
 
     <SearchView
         android:id="@+id/map_searchview"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:queryHint="Search for location..."
         android:iconifiedByDefault="false"
-        android:elevation="8dp"
+        android:elevation="@dimen/eight"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"/>
+        app:layout_constraintRight_toLeftOf="@id/saved_locations_icon_imageview"/>
+
+    <ImageView
+        android:id="@+id/saved_locations_icon_imageview"
+        android:contentDescription="@string/settings_icon"
+        android:layout_width="48dp"
+        android:layout_height="@dimen/forty_eight"
+        android:paddingTop="@dimen/eight"
+        android:paddingLeft="@dimen/four"
+        android:paddingRight="@dimen/four"
+        android:layout_marginLeft="@dimen/four"
+        android:layout_marginRight="@dimen/four"
+        app:layout_constraintTop_toTopOf="@id/map_searchview"
+        app:layout_constraintLeft_toRightOf="@id/map_searchview"
+        app:layout_constraintRight_toLeftOf="@id/setting_icon_imageview"
+        android:src="@drawable/save_icon" />
+
+    <ImageView
+        android:id="@+id/setting_icon_imageview"
+        android:contentDescription="@string/settings_icon"
+        android:layout_width="48dp"
+        android:layout_height="@dimen/forty_eight"
+        android:padding="@dimen/twelve"
+        android:layout_marginRight="@dimen/four"
+        app:layout_constraintTop_toTopOf="@id/map_searchview"
+        app:layout_constraintRight_toRightOf="parent"
+        android:src="@drawable/settings_icon" />
 
     <fragment
         android:id="@+id/maps_fragment"
