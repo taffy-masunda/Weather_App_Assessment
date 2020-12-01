@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/four" >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/sixteen">
+
+        <ImageView
+            android:id="@+id/weather_icon_imageview"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/date_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/sixteen"
+            android:lines="2"
+            android:paddingBottom="@dimen/four"
+            android:text="today's date"
+            app:layout_constraintLeft_toRightOf="@id/weather_icon_imageview"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/weather_description_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/thirty_two"
+            android:textSize="14dp"
+            android:text="15 deg"
+            app:layout_constraintTop_toTopOf="@id/date_textview"
+            app:layout_constraintLeft_toRightOf="@id/date_textview"/>
+
+        <TextView
+            android:id="@+id/current_temprature_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:text="15 deg"
+            app:layout_constraintTop_toBottomOf="@id/date_textview"
+            app:layout_constraintLeft_toLeftOf="@id/date_textview"/>
+
+
+        <TextView
+            android:id="@+id/min_temprature_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/twenty_four"
+            android:textSize="14dp"
+            android:text="15 deg\nmin"
+            app:layout_constraintTop_toBottomOf="@id/date_textview"
+            app:layout_constraintLeft_toRightOf="@id/current_temprature_textview"/>
+
+        <TextView
+            android:id="@+id/max_temprature_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/twenty_four"
+            android:textSize="14dp"
+            android:text="15 deg\nmax"
+            app:layout_constraintTop_toBottomOf="@id/date_textview"
+            app:layout_constraintLeft_toRightOf="@id/min_temprature_textview"/>
+
+        <ImageView
+            android:id="@+id/info_icon_image_view"
+            android:contentDescription="@string/more_information_icon_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@android:drawable/ic_menu_info_details"
+           app:layout_constraintTop_toBottomOf="@id/weather_description_textview"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

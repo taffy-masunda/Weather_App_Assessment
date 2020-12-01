@@ -44,7 +44,7 @@ class SavedLocationViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
     }
 
     fun bind(location: SavedLocation) {
-        locationName?.text =  location.locationName
+        locationName?.text = location.locationName
         locationLatitude?.text = "Latitude \n" + location.locationLatitude.toString()
         locationLongitude?.text = "Longitude \n" + location.locationLongitude.toString()
     }

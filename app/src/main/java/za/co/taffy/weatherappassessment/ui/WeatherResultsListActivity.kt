@@ -1,13 +1,22 @@
 package za.co.taffy.weatherappassessment.ui
 
 import android.os.Bundle
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import za.co.taffy.weatherappassessment.R
+import za.co.taffy.weatherappassessment.data.RetrofitBuilder
+import za.co.taffy.weatherappassessment.ui.adapters.WeatherResultsAdapter
+
 
 class WeatherResultsListActivity : AppCompatActivity() {
 
+    private lateinit var weatherResultsRecyclerView: RecyclerView
+    lateinit var locationNameTextView: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -16,11 +25,35 @@ class WeatherResultsListActivity : AppCompatActivity() {
 
         val locationLatitude = intent.getDoubleExtra("locationLatitude", 0.0)
         val locationLongitude = intent.getDoubleExtra("locationLongitude", 0.0)
+        val locationName = intent.getStringExtra("locationName")
 
-        findViewById<FloatingActionButton>(R.id.refresh_fab).setOnClickListener { view ->
-            // TODO - refresh the results screen
-            Snackbar.make(view, "Latitude : {$locationLatitude} \n Longitude: {$locationLongitude} ", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+        setupViews()
+        locationNameTextView.text = locationName
+        setupRecyclerView(locationLatitude.toString(), locationLongitude.toString())
+    }
+
+    private fun setupViews() {
+        locationNameTextView = findViewById(R.id.location_name_textview)
+        weatherResultsRecyclerView = findViewById(R.id.weather_results_recycler_view)
+    }
+
+
+    private suspend fun getWeatherInformation(latitude: String, longitude: String) {
+        val apiService = RetrofitBuilder.apiService
+        val response = apiService.getFiveDaysForecast(latitude, longitude)
+        weatherResultsRecyclerView.adapter = WeatherResultsAdapter(response.list)
+    }
+
+    private fun setupRecyclerView(latitude: String, longitude: String) {
+
+        CoroutineScope(Dispatchers.Main).launch {
+            getWeatherInformation(latitude, longitude)
+        }
+
+        weatherResultsRecyclerView.apply {
+            recycledViewPool.apply {
+                layoutManager = LinearLayoutManager(context)
+            }
         }
     }
 }

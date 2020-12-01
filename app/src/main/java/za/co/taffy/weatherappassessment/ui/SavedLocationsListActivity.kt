@@ -3,7 +3,6 @@ package za.co.taffy.weatherappassessment.ui
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
-import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -40,9 +39,10 @@ class SavedLocationsListActivity : AppCompatActivity() {
         savedLocationsRecycler.apply {
             recycledViewPool.apply {
                 layoutManager = LinearLayoutManager(context)
-                val savedList = AppDatabase.DATABASE_INSTANCE!!.savedLocationDao().getSavedLocations()
+                val savedList =
+                    AppDatabase.DATABASE_INSTANCE!!.savedLocationDao().getSavedLocations()
                         .sortedByDescending { it.id }
-                if(savedList.isNotEmpty()){
+                if (savedList.isNotEmpty()) {
                     savedLocationsRecycler.visibility = View.VISIBLE
                     noSavedLocationsTextview.visibility = View.INVISIBLE
                 }

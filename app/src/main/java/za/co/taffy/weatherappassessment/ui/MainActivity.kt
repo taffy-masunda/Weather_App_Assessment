@@ -83,6 +83,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         val openSavedWeatherResultsIntent = Intent(this, WeatherResultsListActivity::class.java)
         openSavedWeatherResultsIntent.putExtra("locationLatitude", latitude)
         openSavedWeatherResultsIntent.putExtra("locationLongitude", longitude)
+        openSavedWeatherResultsIntent.putExtra("locationName", getLocationNameByLatLong(latitude, longitude))
 
         startActivity(openSavedWeatherResultsIntent)
     }
