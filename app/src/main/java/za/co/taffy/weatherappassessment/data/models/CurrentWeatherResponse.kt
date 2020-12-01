@@ -1,6 +1,7 @@
 package za.co.taffy.weatherappassessment.data.models
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class Clouds (
     val all: Long
@@ -40,7 +41,7 @@ data class Weather (
     val main: String,
     val description: String,
     val icon: String
-)
+): Serializable
 
 data class Wind (
     val speed: Double,

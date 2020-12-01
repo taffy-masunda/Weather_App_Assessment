@@ -1,6 +1,7 @@
 package za.co.taffy.weatherappassessment.data.models
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class ForecastResponse(
     val city: City,
@@ -34,7 +35,7 @@ data class DayForecast(
     val weatherList: List<Weather>,
     val speed: Double,
     val deg: Long,
-    val clouds: Int)
+    val clouds: Int): Serializable
 
 data class FeelsLike(
     val day: Double,

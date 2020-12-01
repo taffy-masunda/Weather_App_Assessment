@@ -37,7 +37,6 @@ class WeatherResultsListActivity : AppCompatActivity() {
         weatherResultsRecyclerView = findViewById(R.id.weather_results_recycler_view)
     }
 
-
     private suspend fun getWeatherInformation(latitude: String, longitude: String) {
         val apiService = RetrofitBuilder.apiService
         val response = apiService.getFiveDaysForecast(latitude, longitude)
