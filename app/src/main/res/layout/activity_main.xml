@@ -13,6 +13,7 @@
         android:queryHint="Search for location..."
         android:iconifiedByDefault="false"
         android:elevation="@dimen/eight"
+        android:inputType="textAutoComplete"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/saved_locations_icon_imageview"/>
